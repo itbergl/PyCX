@@ -1,15 +1,16 @@
 import pycxsimulator
-from pylab import *
+import numpy as np
+import matplotlib.pyplot as plt
 
 class agent:
     def __init__(self):
-        self.x = rand(2)
-        self.v = rand(2) - array([0.5, 0.5])
+        self.x = np.random.rand(2)
+        self.v = np.random.rand(2) - np.array([0.5, 0.5])
         self.xs = [self.x[0]]
         self.ys = [self.x[1]]
     def accelerate(self):
-        c = mean([a.x for a in agents])
-        f = 0.01 * (c - self.x) / norm(c - self.x) 
+        c = np.mean([a.x for a in agents])
+        f = 0.01 * (c - self.x) / np.linalg.norm(c - self.x) 
         self.v += f # accelerating toward the center of mass
     def move(self):
         self.x += self.v
@@ -24,11 +25,11 @@ def initialize():
     agents = [agent() for _ in range(50)]
     
 def observe():
-    cla()
+    plt.cla()
     for a in agents:
-        plot([a.x[0]], [a.x[1]], 'g.') # drawing current position
-        plot(a.xs, a.ys, 'b', alpha = 0.1) # drawing trajectory as well
-    axis('scaled')
+        plt.plot([a.x[0]], [a.x[1]], 'g.') # drawing current position
+        plt.plot(a.xs, a.ys, 'b', alpha = 0.1) # drawing trajectory as well
+    plt.axis('scaled')
 
 def update():
     global agents
