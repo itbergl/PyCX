@@ -9,7 +9,7 @@ class agent:
         self.ys = [self.x[1]]
     def accelerate(self):
         c = mean([a.x for a in agents])
-        f = 0.5 * (c - self.x) / norm(c - self.x) 
+        f = 0.01 * (c - self.x) / norm(c - self.x) 
         self.v += f # accelerating toward the center of mass
     def move(self):
         self.x += self.v
